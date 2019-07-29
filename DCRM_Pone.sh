@@ -20,9 +20,9 @@ fi
 
 PATH=$PATH:$HOME/bin:/usr/local/python3/bin
 
-export PATH" > /etc/nginx/conf.d/dcrm.conf
+export PATH" > ~/.bash_profile
 source ~/.bash_profile
-python3 -V python  
+python3 -V python
 yum -y groupinstall "Development Tools"
 yum -y install epel-release MySQL-python mysql-devel python-devel python-setuptools libjpeg-devel
 
@@ -53,8 +53,8 @@ echo -e "CREATE DATABASE DCRM DEFAULT CHARSET UTF8;\nGRANT ALL PRIVILEGES ON DCR
 mkdir -p /opt/wwwroot && cd /opt/wwwroot 
 git clone https://github.com/82Flex/DCRM.git 
 cd DCRM
-pip install setuptools==33.1.1
-pip install -r requirements.txt
+pip3 install setuptools==33.1.1
+pip3 install -r requirements.txt
 
 cp DCRM/settings.default.py DCRM/settings.py
 read -p "请输入您的域名(不加http://):" Domain
@@ -66,9 +66,9 @@ sed -i "s/LANGUAGE_CODE = 'en'/LANGUAGE_CODE = 'zh-Hans'/g" DCRM/settings.py
 sed -i "s/'USER': 'dcrm'/'USER': 'root'/g" DCRM/settings.py 
 sed -i "s/'thisisthepassword'/'$DB_password'/g" DCRM/settings.py 
 
-python3 manage.py collectstatic 
-python3 manage.py migrate 
-python3 manage.py createsuperuser
+./manage.py collectstatic 
+./manage.py migrate 
+./manage.py createsuperuser
 
 echo "[uwsgi] 
 
@@ -200,6 +200,8 @@ sys.setdefaultencoding('utf8')" > /usr/lib/python2.7/site-packages/sitecustomize
 
 cd /opt/wwwroot/
 git clone https://github.com/gregmuellegger/django-sortedm2m.git
+cd /opt/wwwroot/DCRM/
+mkdir sortedm2m
 cd /opt/wwwroot/django-sortedm2m
 \cp -rf /opt/wwwroot/django-sortedm2m/sortedm2m/* /opt/wwwroot/DCRM/sortedm2m/
 \rm -r /opt/wwwroot/django-sortedm2m/
