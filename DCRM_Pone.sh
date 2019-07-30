@@ -8,6 +8,7 @@ tar -zxvf Python-3.6.1.tgz
 cd Python-3.6.1
 ./configure --prefix=/usr/local/python3
 make && make install
+
 ln -s /usr/local/python3/bin/python3 /usr/bin/python3
 echo "# .bash_profile
 
@@ -23,11 +24,13 @@ PATH=$PATH:$HOME/bin:/usr/local/python3/bin
 export PATH" > ~/.bash_profile
 source ~/.bash_profile
 python3 -V python
+pip3 install --upgrade pip
+ln -s /usr/local/python3/bin/python3 /usr/bin/python3
 yum -y groupinstall "Development Tools"
 yum -y install epel-release MySQL-python mysql-devel python-devel python-setuptools libjpeg-devel
 
 easy_install pip
-pip install rq==0.13.0 python-memcached Pillow exifread
+pip3 install rq==0.13.0 python-memcached Pillow exifread
 yum -y install mariadb-server redis memcached nginx supervisor curl
 
 systemctl start nginx 
