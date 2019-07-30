@@ -69,9 +69,9 @@ sed -i "s/LANGUAGE_CODE = 'en'/LANGUAGE_CODE = 'zh-Hans'/g" DCRM/settings.py
 sed -i "s/'USER': 'dcrm'/'USER': 'root'/g" DCRM/settings.py
 sed -i "s/'thisisthepassword'/'$DB_password'/g" DCRM/settings.py
 
-./manage.py collectstatic
-./manage.py migrate
-./manage.py createsuperuser
+python3 manage.py collectstatic
+python3 manage.py migrate
+python3 manage.py createsuperuser
 
 echo "[uwsgi]
 
